@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>大輝 藤池 | ポートフォリオ – SelfTalk Lab</title>
+  <meta name="description" content="Momoyama Gakuin University / Business Design 3年。SelfTalk Labの創設者。書籍起点の短尺コンテンツ・ワークシート設計・行動設計を探究し、学びを行動につなぐ仕組みをつくっています。" />
+  <link rel="canonical" href="https://your-username.github.io/" />
+
+  <!-- OGP / Twitter -->
+  <meta property="og:site_name" content="Daiki Fujiike Portfolio" />
+  <meta property="og:title" content="大輝 藤池 | ポートフォリオ – SelfTalk Lab" />
+  <meta property="og:description" content="印象派×文学的美学で設計した静的ポートフォリオ。SelfTalk Labの世界観・制作実績・行動導線を公開。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/ogp.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts (serif for headings, sans for text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-start:#5569a8; /* 淡い群青 */
+      --bg-end:#c7b7e4;   /* 薄藤 */
+      --text:#1d1f23;
+      --muted:#5e6270;
+      --card:#ffffffcc;
+      --accent:#6b5bd2;
+      --ring:#9f8cf1;
+      --paper: radial-gradient(1px 1px at 25% 40%, rgba(0,0,0,0.03), transparent 60%),
+               radial-gradient(1px 1px at 70% 60%, rgba(0,0,0,0.03), transparent 60%);
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --text:#eaecf0;
+        --muted:#cbd5e1;
+        --card:#0b0c11cc;
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Noto Sans JP", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+      color:var(--text);
+      line-height:1.6;
+      background:
+        linear-gradient(120deg, var(--bg-start), var(--bg-end)) fixed;
+      background-attachment: fixed;
+    }
+    .texture::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image: var(--paper);
+      mix-blend-mode:multiply;
+      opacity:.6;
+      z-index:-1;
+    }
+    header{
+      position:sticky; top:0;
+      backdrop-filter:saturate(1.3) blur(8px);
+      background:linear-gradient(to bottom, rgba(255,255,255,.55), rgba(255,255,255,.25));
+      border-bottom:1px solid rgba(255,255,255,.25);
+    }
+    @media (prefers-color-scheme: dark){
+      header{ background:linear-gradient(to bottom, rgba(15,16,25,.6), rgba(15,16,25,.35)); border-bottom-color:rgba(255,255,255,.08)}
+    }
+    .container{max-width:1100px; margin:0 auto; padding:0 16px;}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:12px 0;}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit}
+    .brand-avatar{width:36px; height:36px; border-radius:50%; background:#fff3; box-shadow:0 2px 12px rgba(0,0,0,.15)}
+    h1,h2,h3{font-family:"Playfair Display", serif; letter-spacing:.2px}
+    nav a{margin:0 10px; text-decoration:none; color:inherit; opacity:.9}
+    nav a:hover{opacity:1; text-decoration:underline}
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 16px; border-radius:999px;
+      background:var(--card); border:1px solid rgba(255,255,255,.4);
+      box-shadow:0 8px 24px rgba(0,0,0,.08);
+    }
+    .hero{
+      display:grid; grid-template-columns:1.2fr 1fr; gap:28px; align-items:center;
+      padding:48px 0 28px;
+    }
+    .hero h1{font-size:clamp(28px, 6vw, 48px); margin:.2em 0 .1em}
+    .hero p{font-size:clamp(15px, 1.7vw, 18px); color:var(--muted)}
+    .actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .btn{
+      background:var(--accent); color:white; border:none;
+      padding:12px 16px; border-radius:12px; font-weight:600;
+      box-shadow:0 10px 24px rgba(107,91,210,.28);
+      cursor:pointer;
+    }
+    .btn.secondary{
+      background:transparent; color:inherit; border:1px solid rgba(255,255,255,.5);
+      backdrop-filter: blur(4px);
+    }
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.45);
+      border-radius:20px; padding:20px;
+      box-shadow:0 12px 36px rgba(0,0,0,.10);
+    }
+    section{padding:28px 0}
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+    .section-title{margin:4px 0 6px}
+    .meta{font-size:13px; color:var(--muted)}
+    footer{padding:42px 0 56px; font-size:14px; color:var(--muted)}
+    .reveal{opacity:0; transform:translateY(14px); transition:all .6s ease}
+    .reveal.revealed{opacity:1; transform:none}
+    .lang-toggle{font-size:13px; border:1px solid rgba(255,255,255,.5); padding:6px 10px; border-radius:10px; background:transparent; cursor:pointer}
+    @media (max-width:900px){ .hero{grid-template-columns:1fr} .grid{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr}}
+    /* contact form */
+    form label{display:block; font-size:14px; margin:8px 0 4px}
+    input, textarea{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(0,0,0,.12);
+      background:rgba(255,255,255,.6); outline:none;
+    }
+    @media (prefers-color-scheme: dark){ input,textarea{background:rgba(255,255,255,.04); border-color:rgba(255,255,255,.12); color:var(--text)} }
+    input:focus, textarea:focus{ box-shadow:0 0 0 4px var(--ring) inset; border-color:transparent}
+    .hint{font-size:12px; color:var(--muted)}
+    .badge{display:inline-block; padding:8px 10px; border:1px dashed rgba(255,255,255,.5); border-radius:12px; font-size:12px}
+    .tag{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(107,91,210,.18); margin-right:6px; font-size:12px}
+    noscript{display:block; background:#0008; color:#fff; padding:12px; border-radius:12px; margin-top:12px}
+  </style>
+</head>
+<body class="texture" data-lang="ja">
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Daiki Fujiike">
+        <div class="brand-avatar" aria-hidden="true"></div>
+        <strong>Daiki Fujiike</strong>
+      </a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#writing">Writing</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="lang-toggle" id="langToggle" aria-label="言語切替 / Language">EN / 日本語</button>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="reveal">
+        <span class="pill">
+          <span>Momoyama Gakuin University / Business Design 3年</span>
+          <span class="badge">SelfTalk Lab</span>
+        </span>
+        <h1 data-ja="学びを、行動へ。" data-en="Turning Insight into Action">学びを、行動へ。</h1>
+        <p id="heroCopy" data-ja="書籍起点の短尺コンテンツ・ワークシート・行動設計で、日々の“気づき”を実践に変える。印象派の色彩と文学的リズムで、あなたの学びに呼吸を。"
+           data-en="From book-driven short videos to worksheets and behavior design, I turn daily insights into practice. Impressionist hues and a literary rhythm give your learning room to breathe.">
+          書籍起点の短尺コンテンツ・ワークシート・行動設計で、日々の“気づき”を実践に変える。印象派の色彩と文学的リズムで、あなたの学びに呼吸を。
+        </p>
+        <div class="actions">
+          <a class="btn" href="#contact">相談・コラボはこちら</a>
+          <a class="btn secondary" href="#writing" aria-label="最新記事へ">最新記事へ</a>
+        </div>
+        <div class="meta">誠実・勇敢・思いやりの価値で仕事をします。</div>
+        <noscript>JavaScriptを有効にすると、言語切替・アニメーションが動作します。</noscript>
+      </div>
+      <div class="reveal card">
+        <h3 class="section-title">What I do</h3>
+        <p>• Short-form content from books<br/>• Worksheet & habit design<br/>• Portfolio & learning systems for students</p>
+        <div class="meta">“Learn → Act” を各セクションに設計</div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="reveal">
+      <h2 class="section-title" data-ja="自己紹介 / About" data-en="About">自己紹介 / About</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3 data-ja="自己像" data-en="Profile">自己像</h3>
+          <p id="aboutJa" data-ja="桃山学院大学ビジネスデザイン学部に在籍。SelfTalk Labの創設者として、自己対話を起点に思考力と行動力を鍛える仕組みをつくっています。『7つの習慣』『人間失格』『Chatter』から受けた影響を背景に、変化を楽しみ、学びを共有し続けています。"
+             data-en="I'm a Business Design student and founder of SelfTalk Lab. Drawing from books like 'The 7 Habits,' 'No Longer Human,' and 'Chatter,' I design systems that build thinking and turn reflection into action.">
+            桃山学院大学ビジネスデザイン学部に在籍。SelfTalk Labの創設者として、自己対話を起点に思考力と行動力を鍛える仕組みをつくっています。
+          </p>
+          <div class="actions"><a href="#contact" class="btn secondary">まずは相談</a></div>
+        </div>
+        <div class="card">
+          <h3 data-ja="提供価値" data-en="Value">提供価値</h3>
+          <p data-ja="文学×ビジネスの文脈で、わかりやすい言葉と余白のある体験を設計。動画・ワーク・面談を通じて“次の一歩”に接続します。"
+             data-en="I balance literary tone with business clarity and design experiences with generous whitespace. Through videos, worksheets, and sessions, I connect insight to a clear next step.">
+            文学×ビジネスの文脈で、わかりやすい言葉と余白のある体験を設計。
+          </p>
+          <div class="actions"><a href="#writing" class="btn secondary">学びを見る</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="reveal">
+      <h2 class="section-title">Projects</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>SelfTalk Lab</h3>
+          <p>自己対話の設計。問いのテンプレート、短尺コンテンツ、ルーティン化による継続支援。</p>
+          <div class="meta">Next action: <a href="#contact">PoC相談</a></div>
+        </article>
+        <article class="card">
+          <h3>Book to Action</h3>
+          <p>書籍の学びを「24時間以内の行動」に変換するワーク。</p>
+          <div class="meta">Next action: <a href="#writing">記事を読む</a></div>
+        </article>
+        <article class="card">
+          <h3>Portfolio Systems</h3>
+          <p>大学生のための「見せる・伝える」ポートフォリオ雛形の提供。</p>
+          <div class="meta">Next action: <a href="#contact">雛形を依頼</a></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- WRITING -->
+    <section id="writing" class="reveal">
+      <h2 class="section-title">Writing</h2>
+      <div class="grid">
+        <a class="card" href="articles/article-1-ja.md">
+          <h3>自己対話の設計：7つの習慣×Chatterでつくる日々の問い</h3>
+          <div class="meta">JA / 5 min</div>
+        </a>
+        <a class="card" href="articles/article-2-en.md">
+          <h3>Impressionism for Product Thinking</h3>
+          <div class="meta">EN / 4 min</div>
+        </a>
+        <a class="card" href="articles/article-3-ja.md">
+          <h3>『チーズはどこへ消えた？』から始める小さな実験</h3>
+          <div class="meta">JA / 3 min</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="reveal">
+      <h2 class="section-title">Contact</h2>
+      <div class="grid-2">
+        <form class="card" id="contactForm">
+          <label for="name">お名前</label>
+          <input id="name" name="name" required placeholder="山田 太郎" />
+          <label for="email">メール</label>
+          <input id="email" name="email" type="email" required placeholder="you@example.com" />
+          <label for="msg">メッセージ</label>
+          <textarea id="msg" name="msg" rows="5" required placeholder="ご相談内容や背景など"></textarea>
+          <p class="hint">※ 送信はお使いのメールソフトが開きます（GitHub Pagesでも動作）</p>
+          <button class="btn" type="submit">送信</button>
+        </form>
+        <div class="card">
+          <h3>連絡先 / Availability</h3>
+          <p>コラボ・インターン・制作相談歓迎。<br/>返信目安：48時間以内。</p>
+          <div class="meta">Next action: <a href="mailto:YOUR_EMAIL@example.com?subject=Portfolio%20問い合わせ">メールを開く</a></div>
+          <p class="meta">※ index.html 内の <code>YOUR_EMAIL@example.com</code> をあなたのメールに変更してください。</p>
+          <div>
+            <span class="tag">誠実</span><span class="tag">勇敢</span><span class="tag">思いやり</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div class="grid-2">
+      <div>© <span id="y"></span> Daiki Fujiike · Built for GitHub Pages</div>
+      <div class="meta">Design: Impressionist hues (ultramarine × wisteria) + paper texture / SEO ready / a11y mindful</div>
+    </div>
+  </footer>
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Daiki Fujiike",
+    "alternateName": "大輝 藤池",
+    "jobTitle": "Business Design Student / Founder, SelfTalk Lab",
+    "affiliation": "Momoyama Gakuin University",
+    "url": "https://your-username.github.io/",
+    "sameAs": []
+  }
+  </script>
+
+  <script>
+    // Year
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Language toggle
+    const toggle = document.getElementById("langToggle");
+    const swap = () => {
+      const isJa = document.body.getAttribute("data-lang") === "ja";
+      document.body.setAttribute("data-lang", isJa ? "en" : "ja");
+      document.querySelectorAll("[data-ja]").forEach(el => {
+        const ja = el.getAttribute("data-ja");
+        const en = el.getAttribute("data-en");
+        if(!en) return;
+        el.textContent = (isJa ? en : ja);
+      });
+    };
+    toggle.addEventListener("click", swap);
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("revealed"); io.unobserve(e.target);} });
+    }, { threshold: .12 });
+    document.querySelectorAll(".reveal").forEach(el=> io.observe(el));
+
+    // Contact form -> mailto
+    const form = document.getElementById("contactForm");
+    form.addEventListener("submit", (ev)=>{
+      ev.preventDefault();
+      const name = encodeURIComponent(form.name.value.trim());
+      const email = form.email.value.trim();
+      const msg = encodeURIComponent(form.msg.value.trim());
+      if(!name || !email || !msg){ alert("未入力の項目があります"); return; }
+      const to = "YOUR_EMAIL@example.com"; // ← ここを編集
+      const subject = `Portfolio問合せ / From ${name}`;
+      const body = `From: ${name}%0AEmail: ${email}%0A%0A${msg}`;
+      window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${body}`;
+    });
+  </script>
+</body>
+</html>

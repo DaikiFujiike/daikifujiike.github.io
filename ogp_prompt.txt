@@ -1,0 +1,21 @@
+OGP Image Prompt (1200x630, landscape)
+
+Goal:
+Create a calm, impressionist-inspired cover for Daiki Fujiike's portfolio.
+
+Style:
+- Impressionist brush textures; subtle canvas/paper grain.
+- Palette: ultramarine (群青) × wisteria (薄藤). Soft gradient from left-bottom to right-top.
+- Plenty of whitespace; quiet but confident.
+
+Text:
+- Title (center-left): "Daiki Fujiike"
+- Subtitle (below): "Learn → Act" or 「学びを、行動へ。」
+- Typeface: Elegant serif for title (Playfair-like), clean sans for subtitle.
+
+Layout:
+- Title/subtitle aligned left, not fully centered. Avoid boxed logos.
+- Add a faint vignette and light noise.
+
+Export:
+- 1200×630 JPG (no transparency), high quality.
