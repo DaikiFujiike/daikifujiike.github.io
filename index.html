@@ -1,326 +1,257 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>大輝 藤池 | ポートフォリオ – SelfTalk Lab</title>
-  <meta name="description" content="Momoyama Gakuin University / Business Design 3年。SelfTalk Labの創設者。書籍起点の短尺コンテンツ・ワークシート設計・行動設計を探究し、学びを行動につなぐ仕組みをつくっています。" />
-  <link rel="canonical" href="https://your-username.github.io/" />
-
-  <!-- OGP / Twitter -->
-  <meta property="og:site_name" content="Daiki Fujiike Portfolio" />
-  <meta property="og:title" content="大輝 藤池 | ポートフォリオ – SelfTalk Lab" />
-  <meta property="og:description" content="印象派×文学的美学で設計した静的ポートフォリオ。SelfTalk Labの世界観・制作実績・行動導線を公開。" />
+  <title>Daiki Fujiike | SelfTalk Lab – AandI仕様リデザイン</title>
+  <meta name="description" content="SelfTalk Lab（藤池 大輝）のポートフォリオ。AandIのLP仕様（ヒーロー/2CTA/実績バッジ/サービス/スライダー/情報フッター）を反映した静的サイト。" />
+  <meta property="og:title" content="Daiki Fujiike | SelfTalk Lab" />
+  <meta property="og:description" content="学びを、行動へ。印象派の色彩×ミニマル構成。" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/ogp.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Fonts (serif for headings, sans for text) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-
+  <meta property="og:url" content="https://daikifujiike.github.io/" />
+  <meta name="theme-color" content="#6f79ff" />
   <style>
     :root{
-      --bg-start:#5569a8; /* 淡い群青 */
-      --bg-end:#c7b7e4;   /* 薄藤 */
-      --text:#1d1f23;
-      --muted:#5e6270;
-      --card:#ffffffcc;
-      --accent:#6b5bd2;
-      --ring:#9f8cf1;
-      --paper: radial-gradient(1px 1px at 25% 40%, rgba(0,0,0,0.03), transparent 60%),
-               radial-gradient(1px 1px at 70% 60%, rgba(0,0,0,0.03), transparent 60%);
-    }
-    @media (prefers-color-scheme: dark){
-      :root{
-        --text:#eaecf0;
-        --muted:#cbd5e1;
-        --card:#0b0c11cc;
-      }
+      --bg: #0e0f13;           /* 深い群青の黒 */
+      --card: #151826;         /* カード背面 */
+      --ink: #eef0ff;          /* 文字色 */
+      --ink-dim:#bfc5ff;       /* 薄い文字 */
+      --accent:#8b8dfc;        /* 薄藤 */
+      --accent-2:#c6b7ff;      /* 亜色 */
+      --paper:#1a1e2d;         /* 紙質風 */
+      --ok:#66d9a3; --warn:#ffd36e; --info:#7ecbff;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:"Noto Sans JP", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
-      color:var(--text);
-      line-height:1.6;
-      background:
-        linear-gradient(120deg, var(--bg-start), var(--bg-end)) fixed;
-      background-attachment: fixed;
+    html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{max-width:1080px;margin:auto;padding:0 20px}
+
+    /* ===== Header ===== */
+    header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(10px);background:linear-gradient(180deg, rgba(10,12,18,.85), rgba(10,12,18,.65));border-bottom:1px solid rgba(138,141,253,.18)}
+    .hdr{display:flex;align-items:center;justify-content:space-between;gap:12px;height:64px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .brand .dot{width:10px;height:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));border-radius:999px;box-shadow:0 0 18px rgba(139,141,252,.6)}
+    nav{display:flex;gap:18px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:14px;border:1px solid rgba(139,141,252,.25);background:linear-gradient(180deg,rgba(27,30,45,.9),rgba(22,24,36,.9));transition:.2s ease}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.25)}
+    .btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b0d14;font-weight:700}
+    .btn.ghost{background:transparent}
+
+    /* ===== Hero ===== */
+    .hero{position:relative;isolation:isolate}
+    .hero::before{content:"";position:absolute;inset:-20vh -10vw;z-index:-1;background:radial-gradient(900px 400px at 20% 20%, rgba(139,141,252,.25), transparent 60%), radial-gradient(700px 350px at 80% 10%, rgba(198,183,255,.18), transparent 60%), radial-gradient(1200px 700px at 50% 120%, rgba(75,90,255,.18), transparent 60%)}
+    .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:68px 20px 44px}
+    .kicker{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border:1px dashed rgba(139,141,252,.35);border-radius:999px;color:var(--ink-dim)}
+    .h1{font-size:clamp(28px, 4.6vw, 54px);line-height:1.15;margin:.4em 0 .3em;font-weight:800;letter-spacing:.2px}
+    .lead{color:var(--ink-dim);font-size:clamp(14px, 1.6vw, 18px)}
+    .ctaRow{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0 0}
+    .badges{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
+    .badge{background:linear-gradient(180deg,rgba(33,37,58,.9),rgba(25,29,48,.9));border:1px solid rgba(139,141,252,.25);padding:14px;border-radius:14px}
+    .badge b{display:block;font-size:20px}
+    .hero-illus{aspect-ratio:4/3;border-radius:18px;background:linear-gradient(135deg, rgba(139,141,252,.25), rgba(198,183,255,.15)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="%238b8dfc"/><stop offset="1" stop-color="%23c6b7ff"/></linearGradient></defs><rect fill="%23141822" width="100%" height="100%"/><circle cx="150" cy="140" r="90" fill="url(%23g)" opacity="0.6"/><circle cx="420" cy="340" r="160" fill="url(%23g)" opacity="0.3"/><circle cx="670" cy="180" r="120" fill="url(%23g)" opacity="0.4"/></svg>') center/cover;border:1px solid rgba(139,141,252,.25);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+
+    /* ===== Sections ===== */
+    section{padding:56px 0;border-top:1px solid rgba(139,141,252,.12)}
+    .sec-h{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}
+    .sec-h h2{font-size:clamp(20px,3.2vw,30px);margin:0}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card{background:var(--card);border:1px solid rgba(139,141,252,.2);border-radius:16px;padding:18px}
+    .card h3{margin:.2em 0 .3em;font-size:18px}
+    .muted{color:var(--ink-dim)}
+
+    /* ===== Slider (vanilla, scroll-snap) ===== */
+    .slider{position:relative}
+    .track{display:grid;grid-auto-flow:column;grid-auto-columns:80%; gap:16px; overflow:auto; scroll-snap-type:x mandatory; padding:6px 6px 10px}
+    .slide{scroll-snap-align:center; background:var(--paper); border:1px solid rgba(139,141,252,.2); border-radius:16px; padding:18px; min-height:160px}
+    .dots{display:flex; gap:8px; justify-content:center; margin-top:10px}
+    .dot{width:8px;height:8px;border-radius:999px;background:#485;opacity:.35}
+    .dot.on{opacity:1;background:var(--accent)}
+    .navBtn{position:absolute;top:50%;translate:0 -50%;background:rgba(18,20,30,.6);border:1px solid rgba(139,141,252,.25);padding:10px 12px;border-radius:12px;cursor:pointer}
+    .navBtn:hover{background:rgba(18,20,30,.8)}
+    .navPrev{left:-8px} .navNext{right:-8px}
+
+    /* ===== Info footer ===== */
+    .info{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .info a{display:inline-flex;gap:8px;align-items:center}
+    footer{padding:28px 0 50px;color:var(--ink-dim)}
+    .sns{display:flex;gap:14px;margin-top:10px}
+
+    /* ===== Responsive ===== */
+    @media (max-width:900px){
+      .hero .wrap{grid-template-columns:1fr}
+      .grid3{grid-template-columns:1fr}
+      .track{grid-auto-columns:90%}
+      .navPrev{left:6px} .navNext{right:6px}
+      .info{grid-template-columns:1fr}
     }
-    .texture::before{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none;
-      background-image: var(--paper);
-      mix-blend-mode:multiply;
-      opacity:.6;
-      z-index:-1;
-    }
-    header{
-      position:sticky; top:0;
-      backdrop-filter:saturate(1.3) blur(8px);
-      background:linear-gradient(to bottom, rgba(255,255,255,.55), rgba(255,255,255,.25));
-      border-bottom:1px solid rgba(255,255,255,.25);
-    }
-    @media (prefers-color-scheme: dark){
-      header{ background:linear-gradient(to bottom, rgba(15,16,25,.6), rgba(15,16,25,.35)); border-bottom-color:rgba(255,255,255,.08)}
-    }
-    .container{max-width:1100px; margin:0 auto; padding:0 16px;}
-    .nav{display:flex; align-items:center; justify-content:space-between; padding:12px 0;}
-    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit}
-    .brand-avatar{width:36px; height:36px; border-radius:50%; background:#fff3; box-shadow:0 2px 12px rgba(0,0,0,.15)}
-    h1,h2,h3{font-family:"Playfair Display", serif; letter-spacing:.2px}
-    nav a{margin:0 10px; text-decoration:none; color:inherit; opacity:.9}
-    nav a:hover{opacity:1; text-decoration:underline}
-    .pill{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:10px 16px; border-radius:999px;
-      background:var(--card); border:1px solid rgba(255,255,255,.4);
-      box-shadow:0 8px 24px rgba(0,0,0,.08);
-    }
-    .hero{
-      display:grid; grid-template-columns:1.2fr 1fr; gap:28px; align-items:center;
-      padding:48px 0 28px;
-    }
-    .hero h1{font-size:clamp(28px, 6vw, 48px); margin:.2em 0 .1em}
-    .hero p{font-size:clamp(15px, 1.7vw, 18px); color:var(--muted)}
-    .actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
-    .btn{
-      background:var(--accent); color:white; border:none;
-      padding:12px 16px; border-radius:12px; font-weight:600;
-      box-shadow:0 10px 24px rgba(107,91,210,.28);
-      cursor:pointer;
-    }
-    .btn.secondary{
-      background:transparent; color:inherit; border:1px solid rgba(255,255,255,.5);
-      backdrop-filter: blur(4px);
-    }
-    .card{
-      background:var(--card);
-      border:1px solid rgba(255,255,255,.45);
-      border-radius:20px; padding:20px;
-      box-shadow:0 12px 36px rgba(0,0,0,.10);
-    }
-    section{padding:28px 0}
-    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
-    .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
-    .section-title{margin:4px 0 6px}
-    .meta{font-size:13px; color:var(--muted)}
-    footer{padding:42px 0 56px; font-size:14px; color:var(--muted)}
-    .reveal{opacity:0; transform:translateY(14px); transition:all .6s ease}
-    .reveal.revealed{opacity:1; transform:none}
-    .lang-toggle{font-size:13px; border:1px solid rgba(255,255,255,.5); padding:6px 10px; border-radius:10px; background:transparent; cursor:pointer}
-    @media (max-width:900px){ .hero{grid-template-columns:1fr} .grid{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr}}
-    /* contact form */
-    form label{display:block; font-size:14px; margin:8px 0 4px}
-    input, textarea{
-      width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(0,0,0,.12);
-      background:rgba(255,255,255,.6); outline:none;
-    }
-    @media (prefers-color-scheme: dark){ input,textarea{background:rgba(255,255,255,.04); border-color:rgba(255,255,255,.12); color:var(--text)} }
-    input:focus, textarea:focus{ box-shadow:0 0 0 4px var(--ring) inset; border-color:transparent}
-    .hint{font-size:12px; color:var(--muted)}
-    .badge{display:inline-block; padding:8px 10px; border:1px dashed rgba(255,255,255,.5); border-radius:12px; font-size:12px}
-    .tag{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(107,91,210,.18); margin-right:6px; font-size:12px}
-    noscript{display:block; background:#0008; color:#fff; padding:12px; border-radius:12px; margin-top:12px}
   </style>
 </head>
-<body class="texture" data-lang="ja">
+<body>
+  <!-- ===== Header ===== -->
   <header>
-    <div class="container nav">
-      <a class="brand" href="#top" aria-label="Daiki Fujiike">
-        <div class="brand-avatar" aria-hidden="true"></div>
-        <strong>Daiki Fujiike</strong>
-      </a>
+    <div class="wrap hdr">
+      <div class="brand"><span class="dot"></span><a href="#top">Daiki Fujiike / SelfTalk Lab</a></div>
       <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#writing">Writing</a>
-        <a href="#contact">Contact</a>
+        <a class="btn ghost" href="#services">サービス</a>
+        <a class="btn ghost" href="#about">プロフィール</a>
+        <a class="btn primary" href="mailto:YOUR_EMAIL@example.com?subject=%E7%9B%B8%E8%AB%87%E3%83%BB%E4%BC%9A%E8%AB%87%E3%81%AE%E4%BC%9A%E7%B4%84">お問い合わせ</a>
       </nav>
-      <button class="lang-toggle" id="langToggle" aria-label="言語切替 / Language">EN / 日本語</button>
     </div>
   </header>
 
-  <main id="top" class="container">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="reveal">
-        <span class="pill">
-          <span>Momoyama Gakuin University / Business Design 3年</span>
-          <span class="badge">SelfTalk Lab</span>
-        </span>
-        <h1 data-ja="学びを、行動へ。" data-en="Turning Insight into Action">学びを、行動へ。</h1>
-        <p id="heroCopy" data-ja="書籍起点の短尺コンテンツ・ワークシート・行動設計で、日々の“気づき”を実践に変える。印象派の色彩と文学的リズムで、あなたの学びに呼吸を。"
-           data-en="From book-driven short videos to worksheets and behavior design, I turn daily insights into practice. Impressionist hues and a literary rhythm give your learning room to breathe.">
-          書籍起点の短尺コンテンツ・ワークシート・行動設計で、日々の“気づき”を実践に変える。印象派の色彩と文学的リズムで、あなたの学びに呼吸を。
-        </p>
-        <div class="actions">
-          <a class="btn" href="#contact">相談・コラボはこちら</a>
-          <a class="btn secondary" href="#writing" aria-label="最新記事へ">最新記事へ</a>
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <span class="kicker">学びを、行動へ。</span>
+        <h1 class="h1">印象派の色彩で設計する <br> 学習体験とデジタル発信。</h1>
+        <p class="lead">AandIのLP仕様（<b>2つのCTA</b>、<b>実績バッジ</b>、<b>スライダー</b>、<b>情報フッター</b>）を踏襲しつつ、SelfTalk Labの文脈に最適化したミニマルな構成。</p>
+        <div class="ctaRow">
+          <a class="btn primary" href="#personal">個人向けサービス</a>
+          <a class="btn" href="#biz">法人向けサービス</a>
         </div>
-        <div class="meta">誠実・勇敢・思いやりの価値で仕事をします。</div>
-        <noscript>JavaScriptを有効にすると、言語切替・アニメーションが動作します。</noscript>
+        <div class="badges" aria-label="ハイライト">
+          <div class="badge" role="group" aria-label="短尺コンテンツ"><b>Short-form</b><span class="muted">書籍起点の動画/ノート</span></div>
+          <div class="badge" role="group" aria-label="ワークシート設計"><b>Worksheets</b><span class="muted">24時間以内の行動</span></div>
+          <div class="badge" role="group" aria-label="ポートフォリオ"><b>Portfolio</b><span class="muted">見せる・伝える設計</span></div>
+        </div>
       </div>
-      <div class="reveal card">
-        <h3 class="section-title">What I do</h3>
-        <p>• Short-form content from books<br/>• Worksheet & habit design<br/>• Portfolio & learning systems for students</p>
-        <div class="meta">“Learn → Act” を各セクションに設計</div>
-      </div>
-    </section>
+      <div class="hero-illus" aria-hidden="true"></div>
+    </div>
+  </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="reveal">
-      <h2 class="section-title" data-ja="自己紹介 / About" data-en="About">自己紹介 / About</h2>
-      <div class="grid-2">
-        <div class="card">
-          <h3 data-ja="自己像" data-en="Profile">自己像</h3>
-          <p id="aboutJa" data-ja="桃山学院大学ビジネスデザイン学部に在籍。SelfTalk Labの創設者として、自己対話を起点に思考力と行動力を鍛える仕組みをつくっています。『7つの習慣』『人間失格』『Chatter』から受けた影響を背景に、変化を楽しみ、学びを共有し続けています。"
-             data-en="I'm a Business Design student and founder of SelfTalk Lab. Drawing from books like 'The 7 Habits,' 'No Longer Human,' and 'Chatter,' I design systems that build thinking and turn reflection into action.">
-            桃山学院大学ビジネスデザイン学部に在籍。SelfTalk Labの創設者として、自己対話を起点に思考力と行動力を鍛える仕組みをつくっています。
-          </p>
-          <div class="actions"><a href="#contact" class="btn secondary">まずは相談</a></div>
-        </div>
-        <div class="card">
-          <h3 data-ja="提供価値" data-en="Value">提供価値</h3>
-          <p data-ja="文学×ビジネスの文脈で、わかりやすい言葉と余白のある体験を設計。動画・ワーク・面談を通じて“次の一歩”に接続します。"
-             data-en="I balance literary tone with business clarity and design experiences with generous whitespace. Through videos, worksheets, and sessions, I connect insight to a clear next step.">
-            文学×ビジネスの文脈で、わかりやすい言葉と余白のある体験を設計。
-          </p>
-          <div class="actions"><a href="#writing" class="btn secondary">学びを見る</a></div>
-        </div>
+  <!-- ===== Services ===== -->
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>サービス</h2>
+        <a class="btn ghost" href="#contact">相談する</a>
       </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="reveal">
-      <h2 class="section-title">Projects</h2>
-      <div class="grid">
-        <article class="card">
-          <h3>SelfTalk Lab</h3>
-          <p>自己対話の設計。問いのテンプレート、短尺コンテンツ、ルーティン化による継続支援。</p>
-          <div class="meta">Next action: <a href="#contact">PoC相談</a></div>
+      <div class="grid3">
+        <article class="card" id="personal">
+          <h3>SelfTalk Lab（個人）</h3>
+          <p class="muted">自己対話テンプレート×習慣化。動画ノートと週次の見直しで行動密度を高めます。</p>
+          <p><a class="btn" href="#contact">無料相談</a></p>
         </article>
-        <article class="card">
-          <h3>Book to Action</h3>
-          <p>書籍の学びを「24時間以内の行動」に変換するワーク。</p>
-          <div class="meta">Next action: <a href="#writing">記事を読む</a></div>
+        <article class="card" id="biz">
+          <h3>学習デザイン（法人）</h3>
+          <p class="muted">書籍起点のマイクロラーニング、内製ポートフォリオ雛形、学生向けワークショップ設計。</p>
+          <p><a class="btn" href="#contact">資料請求</a></p>
         </article>
         <article class="card">
           <h3>Portfolio Systems</h3>
-          <p>大学生のための「見せる・伝える」ポートフォリオ雛形の提供。</p>
-          <div class="meta">Next action: <a href="#contact">雛形を依頼</a></div>
+          <p class="muted">大学生のための「見せる・伝える」雛形。GitHub Pages対応の静的テンプレートを提供。</p>
+          <p><a class="btn" href="#contact">雛形を依頼</a></p>
         </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- WRITING -->
-    <section id="writing" class="reveal">
-      <h2 class="section-title">Writing</h2>
-      <div class="grid">
-        <a class="card" href="articles/article-1-ja.md">
-          <h3>自己対話の設計：7つの習慣×Chatterでつくる日々の問い</h3>
-          <div class="meta">JA / 5 min</div>
-        </a>
-        <a class="card" href="articles/article-2-en.md">
-          <h3>Impressionism for Product Thinking</h3>
-          <div class="meta">EN / 4 min</div>
-        </a>
-        <a class="card" href="articles/article-3-ja.md">
-          <h3>『チーズはどこへ消えた？』から始める小さな実験</h3>
-          <div class="meta">JA / 3 min</div>
-        </a>
+  <!-- ===== Slider ===== -->
+  <section aria-label="事例・ノートのスライダー">
+    <div class="wrap slider">
+      <div class="sec-h"><h2>Notes & Cases</h2></div>
+      <button class="navBtn navPrev" aria-label="前へ" onclick="snap(-1)">◀</button>
+      <button class="navBtn navNext" aria-label="次へ" onclick="snap(1)">▶</button>
+      <div class="track" id="track" onscroll="syncDots()">
+        <div class="slide"><b>自己対話：7つの習慣 × Chatter</b><p class="muted">毎日の問いの雛形で、思考のループを良性化。</p></div>
+        <div class="slide"><b>Book to Action</b><p class="muted">『チーズはどこへ消えた？』→ 24時間以内の小さな実験。</p></div>
+        <div class="slide"><b>Portfolio 雛形</b><p class="muted">GitHub Pagesにそのまま載せられる静的構成。</p></div>
+        <div class="slide"><b>TikTok Short-form</b><p class="muted">書籍の要点を60秒で。実践の導線を必ず添える。</p></div>
       </div>
-    </section>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+    </div>
+  </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="reveal">
-      <h2 class="section-title">Contact</h2>
-      <div class="grid-2">
-        <form class="card" id="contactForm">
-          <label for="name">お名前</label>
-          <input id="name" name="name" required placeholder="山田 太郎" />
-          <label for="email">メール</label>
-          <input id="email" name="email" type="email" required placeholder="you@example.com" />
-          <label for="msg">メッセージ</label>
-          <textarea id="msg" name="msg" rows="5" required placeholder="ご相談内容や背景など"></textarea>
-          <p class="hint">※ 送信はお使いのメールソフトが開きます（GitHub Pagesでも動作）</p>
-          <button class="btn" type="submit">送信</button>
-        </form>
-        <div class="card">
-          <h3>連絡先 / Availability</h3>
-          <p>コラボ・インターン・制作相談歓迎。<br/>返信目安：48時間以内。</p>
-          <div class="meta">Next action: <a href="mailto:YOUR_EMAIL@example.com?subject=Portfolio%20問い合わせ">メールを開く</a></div>
-          <p class="meta">※ index.html 内の <code>YOUR_EMAIL@example.com</code> をあなたのメールに変更してください。</p>
-          <div>
-            <span class="tag">誠実</span><span class="tag">勇敢</span><span class="tag">思いやり</span>
-          </div>
+  <!-- ===== About ===== -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-h"><h2>プロフィール</h2></div>
+      <div class="grid3">
+        <article class="card">
+          <h3>藤池 大輝</h3>
+          <p class="muted">Momoyama Gakuin University / Business Design 3年。SelfTalk Lab 創設。</p>
+        </article>
+        <article class="card">
+          <h3>スキル</h3>
+          <p class="muted">構成・コピー / HTML・CSS・JS / GitHub Pages / Notion / Canva</p>
+        </article>
+        <article class="card">
+          <h3>価値観</h3>
+          <p class="muted">誠実・勇敢・思いやり</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Info (利用規約/プライバシー/特商法) ===== -->
+  <section>
+    <div class="wrap info">
+      <div>
+        <h2 class="muted" style="margin:0 0 8px">Information</h2>
+        <p><a href="#terms">利用規約（準備中）</a></p>
+        <p><a href="#privacy">プライバシーポリシー（準備中）</a></p>
+        <p><a href="#law">特定商取引法に基づく表記（準備中）</a></p>
+      </div>
+      <div>
+        <h2 class="muted" style="margin:0 0 8px">Contact</h2>
+        <p>返信目安：48時間以内</p>
+        <div class="sns">
+          <a href="https://x.com" target="_blank" rel="noopener">X</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <footer class="container">
-    <div class="grid-2">
-      <div>© <span id="y"></span> Daiki Fujiike · Built for GitHub Pages</div>
-      <div class="meta">Design: Impressionist hues (ultramarine × wisteria) + paper texture / SEO ready / a11y mindful</div>
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="wrap">
+      <p>© <span id="y"></span> Daiki Fujiike · Built for GitHub Pages · Design: Impressionist hues</p>
     </div>
   </footer>
 
-  <!-- Schema.org structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Daiki Fujiike",
-    "alternateName": "大輝 藤池",
-    "jobTitle": "Business Design Student / Founder, SelfTalk Lab",
-    "affiliation": "Momoyama Gakuin University",
-    "url": "https://your-username.github.io/",
-    "sameAs": []
-  }
-  </script>
+  <!-- Floating CTA -->
+  <a href="mailto:YOUR_EMAIL@example.com?subject=%E7%9B%B8%E8%AB%87%E3%81%AE%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B" class="btn primary" style="position:fixed;right:16px;bottom:16px;z-index:60">問い合わせ</a>
 
   <script>
     // Year
-    document.getElementById("y").textContent = new Date().getFullYear();
+    document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Language toggle
-    const toggle = document.getElementById("langToggle");
-    const swap = () => {
-      const isJa = document.body.getAttribute("data-lang") === "ja";
-      document.body.setAttribute("data-lang", isJa ? "en" : "ja");
-      document.querySelectorAll("[data-ja]").forEach(el => {
-        const ja = el.getAttribute("data-ja");
-        const en = el.getAttribute("data-en");
-        if(!en) return;
-        el.textContent = (isJa ? en : ja);
-      });
-    };
-    toggle.addEventListener("click", swap);
-
-    // Reveal on scroll
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("revealed"); io.unobserve(e.target);} });
-    }, { threshold: .12 });
-    document.querySelectorAll(".reveal").forEach(el=> io.observe(el));
-
-    // Contact form -> mailto
-    const form = document.getElementById("contactForm");
-    form.addEventListener("submit", (ev)=>{
-      ev.preventDefault();
-      const name = encodeURIComponent(form.name.value.trim());
-      const email = form.email.value.trim();
-      const msg = encodeURIComponent(form.msg.value.trim());
-      if(!name || !email || !msg){ alert("未入力の項目があります"); return; }
-      const to = "YOUR_EMAIL@example.com"; // ← ここを編集
-      const subject = `Portfolio問合せ / From ${name}`;
-      const body = `From: ${name}%0AEmail: ${email}%0A%0A${msg}`;
-      window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${body}`;
-    });
+    // Slider dots
+    const track = document.getElementById('track');
+    const dotsBox = document.getElementById('dots');
+    function buildDots(){
+      const n = track.children.length;
+      dotsBox.innerHTML = '';
+      for(let i=0;i<n;i++){
+        const d = document.createElement('span');
+        d.className = 'dot' + (i===0?' on':'');
+        d.dataset.i = i;
+        d.addEventListener('click', ()=>scrollToIndex(i));
+        dotsBox.appendChild(d);
+      }
+    }
+    function indexFromScroll(){
+      const w = track.getBoundingClientRect().width;
+      const sc = track.scrollLeft;
+      return Math.round(sc / (w*0.8 + 16));
+    }
+    function syncDots(){
+      const idx = indexFromScroll();
+      [...dotsBox.children].forEach((d,i)=>d.classList.toggle('on', i===idx));
+    }
+    function scrollToIndex(i){
+      const w = track.getBoundingClientRect().width;
+      track.scrollTo({ left: i*(w*0.8 + 16), behavior:'smooth' });
+    }
+    function snap(step){
+      const i = Math.max(0, Math.min(track.children.length-1, indexFromScroll()+step));
+      scrollToIndex(i);
+    }
+    buildDots();
   </script>
 </body>
 </html>
