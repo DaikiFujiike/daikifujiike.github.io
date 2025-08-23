@@ -1,257 +1,594 @@
-<!doctype html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Daiki Fujiike | SelfTalk Lab – AandI仕様リデザイン</title>
-  <meta name="description" content="SelfTalk Lab（藤池 大輝）のポートフォリオ。AandIのLP仕様（ヒーロー/2CTA/実績バッジ/サービス/スライダー/情報フッター）を反映した静的サイト。" />
-  <meta property="og:title" content="Daiki Fujiike | SelfTalk Lab" />
-  <meta property="og:description" content="学びを、行動へ。印象派の色彩×ミニマル構成。" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://daikifujiike.github.io/" />
-  <meta name="theme-color" content="#6f79ff" />
-  <style>
-    :root{
-      --bg: #0e0f13;           /* 深い群青の黒 */
-      --card: #151826;         /* カード背面 */
-      --ink: #eef0ff;          /* 文字色 */
-      --ink-dim:#bfc5ff;       /* 薄い文字 */
-      --accent:#8b8dfc;        /* 薄藤 */
-      --accent-2:#c6b7ff;      /* 亜色 */
-      --paper:#1a1e2d;         /* 紙質風 */
-      --ok:#66d9a3; --warn:#ffd36e; --info:#7ecbff;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .wrap{max-width:1080px;margin:auto;padding:0 20px}
+(cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF'
+diff --git a/index.html b/index.html
+--- a/index.html
++++ b/index.html
+@@ -0,0 +1,585 @@
++<!DOCTYPE html>
++<html lang="ja">
++<head>
++    <meta charset="UTF-8">
++    <meta name="viewport" content="width=device-width, initial-scale=1.0">
++    <title>SocialBoost Pro - SNSコンサルティング | デジタルマーケティングの専門家</title>
++    <meta name="description" content="SNSマーケティングとデジタル戦略のプロフェッショナル。Instagram、TikTok、YouTube、Twitterで成果を最大化。">
++    <meta property="og:title" content="SocialBoost Pro - SNSコンサルティング">
++    <meta property="og:description" content="SNSマーケティングとデジタル戦略のプロフェッショナル">
++    <meta property="og:image" content="./assets/og-image.jpg">
++    <meta property="og:url" content="https://socialboost-pro.com">
++    <link rel="preconnect" href="https://fonts.googleapis.com">
++    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
++    <link rel="stylesheet" href="styles.css">
++    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
++    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
++    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
++</head>
++<body>
++    <!-- Loading Screen -->
++    <div class="loading-screen" id="loadingScreen">
++        <div class="loading-content">
++            <div class="loading-logo">
++                <span>SocialBoost</span>
++                <span class="pro">Pro</span>
++            </div>
++            <div class="loading-bar">
++                <div class="loading-progress"></div>
++            </div>
++            <p class="loading-text">デジタル体験を準備中...</p>
++        </div>
++    </div>
++
++    <!-- Cursor -->
++    <div class="custom-cursor" id="cursor">
++        <div class="cursor-dot"></div>
++        <div class="cursor-outline"></div>
++    </div>
++
++    <!-- Header -->
++    <header class="header" id="header">
++        <nav class="nav">
++            <div class="nav-brand">
++                <a href="#" class="brand-link">
++                    <span class="brand-text">SocialBoost</span>
++                    <span class="brand-pro">Pro</span>
++                </a>
++            </div>
++            
++            <ul class="nav-menu" id="navMenu">
++                <li class="nav-item">
++                    <a href="#home" class="nav-link" data-section="home">ホーム</a>
++                </li>
++                <li class="nav-item">
++                    <a href="#services" class="nav-link" data-section="services">サービス</a>
++                </li>
++                <li class="nav-item">
++                    <a href="#results" class="nav-link" data-section="results">実績</a>
++                </li>
++                <li class="nav-item">
++                    <a href="#about" class="nav-link" data-section="about">会社概要</a>
++                </li>
++                <li class="nav-item">
++                    <a href="#contact" class="nav-link cta-button" data-section="contact">無料相談</a>
++                </li>
++            </ul>
++
++            <div class="nav-toggle" id="navToggle">
++                <span></span>
++                <span></span>
++                <span></span>
++            </div>
++        </nav>
++    </header>
++
++    <!-- Main Content -->
++    <main class="main">
++        <!-- Hero Section -->
++        <section class="hero" id="home">
++            <div class="hero-bg" id="heroBg"></div>
++            <div class="container">
++                <div class="hero-content">
++                    <div class="hero-text">
++                        <h1 class="hero-title">
++                            <span class="title-line">SNSマーケティングで</span>
++                            <span class="title-line">ビジネスを</span>
++                            <span class="title-line gradient-text">次のレベルへ</span>
++                        </h1>
++                        <p class="hero-description">
++                            データドリブンなアプローチで、あなたのブランドのSNS戦略を最適化。
++                            Instagram、TikTok、YouTube、Twitterで確実な成果を実現します。
++                        </p>
++                        <div class="hero-cta">
++                            <a href="#contact" class="btn btn-primary">
++                                無料戦略診断を受ける
++                                <span class="btn-arrow">→</span>
++                            </a>
++                            <a href="#services" class="btn btn-secondary">
++                                サービス詳細
++                            </a>
++                        </div>
++                    </div>
++                    <div class="hero-visual">
++                        <div class="floating-cards">
++                            <div class="card platform-card instagram">
++                                <div class="card-icon">📸</div>
++                                <div class="card-stats">
++                                    <span class="stat-number">+250%</span>
++                                    <span class="stat-label">エンゲージメント</span>
++                                </div>
++                            </div>
++                            <div class="card platform-card tiktok">
++                                <div class="card-icon">🎵</div>
++                                <div class="card-stats">
++                                    <span class="stat-number">+400%</span>
++                                    <span class="stat-label">リーチ拡大</span>
++                                </div>
++                            </div>
++                            <div class="card platform-card youtube">
++                                <div class="card-icon">📹</div>
++                                <div class="card-stats">
++                                    <span class="stat-number">+180%</span>
++                                    <span class="stat-label">登録者増加</span>
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++                </div>
++            </div>
++            
++            <!-- Scroll Indicator -->
++            <div class="scroll-indicator">
++                <div class="scroll-line"></div>
++                <span class="scroll-text">Scroll</span>
++            </div>
++        </section>
++
++        <!-- Services Section -->
++        <section class="services" id="services">
++            <div class="container">
++                <div class="section-header">
++                    <span class="section-tag">Services</span>
++                    <h2 class="section-title">包括的なSNSソリューション</h2>
++                    <p class="section-description">
++                        戦略立案から運用、分析まで、SNSマーケティングの全領域をカバーする
++                        プロフェッショナルサービスをご提供します。
++                    </p>
++                </div>
++
++                <div class="services-grid">
++                    <div class="service-card" data-service="strategy">
++                        <div class="service-icon">
++                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
++                                <path d="M9 11H15M9 15H15M17 21H7C5.89543 21 5 20.1046 5 19V5C5 3.89543 5.89543 3 7 3H12.5858C12.851 3 13.1054 3.10536 13.2929 3.29289L18.7071 8.70711C18.8946 8.89464 19 9.149 19 9.41421V19C19 20.1046 18.1046 21 17 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
++                            </svg>
++                        </div>
++                        <h3 class="service-title">戦略コンサルティング</h3>
++                        <p class="service-description">
++                            ブランドの特性とターゲット分析に基づいた、包括的なSNS戦略を立案。競合分析とKPI設定で確実な成果を実現します。
++                        </p>
++                        <ul class="service-features">
++                            <li>ターゲットペルソナ分析</li>
++                            <li>競合調査・市場分析</li>
++                            <li>KPI設定・成果測定</li>
++                            <li>年間戦略ロードマップ</li>
++                        </ul>
++                        <div class="service-price">¥300,000〜</div>
++                    </div>
++
++                    <div class="service-card" data-service="content">
++                        <div class="service-icon">
++                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
++                                <path d="M4 6H20M4 12H20M4 18H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
++                            </svg>
++                        </div>
++                        <h3 class="service-title">コンテンツ制作・運用</h3>
++                        <p class="service-description">
++                            プラットフォーム特性を活かした高品質コンテンツの企画・制作・投稿。データに基づいた最適なタイミングで配信します。
++                        </p>
++                        <ul class="service-features">
++                            <li>コンテンツ企画・制作</li>
++                            <li>投稿スケジュール管理</li>
++                            <li>コミュニティマネジメント</li>
++                            <li>ハッシュタグ最適化</li>
++                        </ul>
++                        <div class="service-price">¥200,000〜</div>
++                    </div>
++
++                    <div class="service-card" data-service="ads">
++                        <div class="service-icon">
++                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
++                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
++                            </svg>
++                        </div>
++                        <h3 class="service-title">SNS広告運用</h3>
++                        <p class="service-description">
++                            精密なターゲティングと継続的な最適化により、広告費用対効果を最大化。各プラットフォームの特性を活かした運用を行います。
++                        </p>
++                        <ul class="service-features">
++                            <li>広告戦略立案・実行</li>
++                            <li>A/Bテスト・最適化</li>
++                            <li>予算管理・ROI改善</li>
++                            <li>詳細レポーティング</li>
++                        </ul>
++                        <div class="service-price">¥150,000〜</div>
++                    </div>
++
++                    <div class="service-card" data-service="analytics">
++                        <div class="service-icon">
++                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
++                                <path d="M3 3V21H21M7 13L11 9L15 13L20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
++                            </svg>
++                        </div>
++                        <h3 class="service-title">データ分析・改善</h3>
++                        <p class="service-description">
++                            高度な分析ツールを活用した詳細な効果測定と改善提案。データドリブンなアプローチで継続的な成長を支援します。
++                        </p>
++                        <ul class="service-features">
++                            <li>詳細データ分析</li>
++                            <li>月次レポート作成</li>
++                            <li>改善提案・実装</li>
++                            <li>競合ベンチマーク</li>
++                        </ul>
++                        <div class="service-price">¥100,000〜</div>
++                    </div>
++                </div>
++            </div>
++        </section>
++
++        <!-- Results Section -->
++        <section class="results" id="results">
++            <div class="container">
++                <div class="section-header">
++                    <span class="section-tag">Results</span>
++                    <h2 class="section-title">実績で証明する成果</h2>
++                    <p class="section-description">
++                        数字が語る確実な成果。クライアント様のビジネス成長を支援してきた実績をご紹介します。
++                    </p>
++                </div>
++
++                <div class="results-stats">
++                    <div class="stat-card">
++                        <div class="stat-number" data-target="250">0</div>
++                        <div class="stat-label">プロジェクト完了</div>
++                    </div>
++                    <div class="stat-card">
++                        <div class="stat-number" data-target="450">0</div>
++                        <div class="stat-suffix">%</div>
++                        <div class="stat-label">平均成長率</div>
++                    </div>
++                    <div class="stat-card">
++                        <div class="stat-number" data-target="98">0</div>
++                        <div class="stat-suffix">%</div>
++                        <div class="stat-label">顧客満足度</div>
++                    </div>
++                    <div class="stat-card">
++                        <div class="stat-number" data-target="50">0</div>
++                        <div class="stat-suffix">M</div>
++                        <div class="stat-label">総リーチ数</div>
++                    </div>
++                </div>
++
++                <div class="case-studies">
++                    <div class="case-study">
++                        <div class="case-image">
++                            <div class="case-placeholder">
++                                <span class="case-icon">🏢</span>
++                            </div>
++                        </div>
++                        <div class="case-content">
++                            <h3 class="case-title">BtoB SaaS企業</h3>
++                            <p class="case-description">
++                                LinkedInとTwitterを活用したリード獲得戦略により、6ヶ月で商談数を300%増加。コンテンツマーケティングとSNS広告の連携で高品質なリードを継続的に獲得。
++                            </p>
++                            <div class="case-results">
++                                <div class="case-metric">
++                                    <span class="metric-value">+300%</span>
++                                    <span class="metric-label">商談数増加</span>
++                                </div>
++                                <div class="case-metric">
++                                    <span class="metric-value">¥50M</span>
++                                    <span class="metric-label">売上向上</span>
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++
++                    <div class="case-study">
++                        <div class="case-image">
++                            <div class="case-placeholder">
++                                <span class="case-icon">👗</span>
++                            </div>
++                        </div>
++                        <div class="case-content">
++                            <h3 class="case-title">ファッションブランド</h3>
++                            <p class="case-description">
++                                InstagramとTikTokでのインフルエンサーマーケティングと UGC戦略により、ブランド認知度と売上を大幅に向上。Z世代をターゲットとした戦略的アプローチを実行。
++                            </p>
++                            <div class="case-results">
++                                <div class="case-metric">
++                                    <span class="metric-value">+500%</span>
++                                    <span class="metric-label">フォロワー増加</span>
++                                </div>
++                                <div class="case-metric">
++                                    <span class="metric-value">+200%</span>
++                                    <span class="metric-label">EC売上向上</span>
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++
++                    <div class="case-study">
++                        <div class="case-image">
++                            <div class="case-placeholder">
++                                <span class="case-icon">🍕</span>
++                            </div>
++                        </div>
++                        <div class="case-content">
++                            <h3 class="case-title">レストランチェーン</h3>
++                            <p class="case-description">
++                                Instagram、Facebook、TikTokを活用した統合マーケティングにより、来店客数と売上を大幅に増加。地域密着型のコンテンツとターゲティング広告で効果を最大化。
++                            </p>
++                            <div class="case-results">
++                                <div class="case-metric">
++                                    <span class="metric-value">+180%</span>
++                                    <span class="metric-label">来店客数増加</span>
++                                </div>
++                                <div class="case-metric">
++                                    <span class="metric-value">+250%</span>
++                                    <span class="metric-label">オンライン売上</span>
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++                </div>
++            </div>
++        </section>
++
++        <!-- About Section -->
++        <section class="about" id="about">
++            <div class="container">
++                <div class="about-content">
++                    <div class="about-text">
++                        <span class="section-tag">About Us</span>
++                        <h2 class="section-title">デジタルマーケティングの専門家チーム</h2>
++                        <p class="about-description">
++                            SocialBoost Proは、SNSマーケティングに特化したデジタルエージェンシーです。
++                            データサイエンス、クリエイティブ、戦略立案の専門家が連携し、
++                            クライアント様のビジネス成長を実現します。
++                        </p>
++                        
++                        <div class="about-features">
++                            <div class="feature-item">
++                                <div class="feature-icon">🎯</div>
++                                <div class="feature-content">
++                                    <h4>戦略的アプローチ</h4>
++                                    <p>データに基づいた戦略立案で確実な成果を実現</p>
++                                </div>
++                            </div>
++                            <div class="feature-item">
++                                <div class="feature-icon">🚀</div>
++                                <div class="feature-content">
++                                    <h4>最新技術の活用</h4>
++                                    <p>AI分析ツールと自動化技術で効率的な運用を提供</p>
++                                </div>
++                            </div>
++                            <div class="feature-item">
++                                <div class="feature-icon">📊</div>
++                                <div class="feature-content">
++                                    <h4>透明性のある報告</h4>
++                                    <p>詳細なデータ分析と改善提案を定期的にご報告</p>
++                                </div>
++                            </div>
++                        </div>
++
++                        <div class="about-cta">
++                            <a href="#contact" class="btn btn-primary">
++                                無料相談を予約
++                                <span class="btn-arrow">→</span>
++                            </a>
++                        </div>
++                    </div>
++                    
++                    <div class="about-visual">
++                        <div class="team-grid">
++                            <div class="team-member">
++                                <div class="member-avatar">
++                                    <span class="avatar-placeholder">👨‍💼</span>
++                                </div>
++                                <div class="member-info">
++                                    <h4>田中 太郎</h4>
++                                    <p>代表取締役・戦略ディレクター</p>
++                                </div>
++                            </div>
++                            <div class="team-member">
++                                <div class="member-avatar">
++                                    <span class="avatar-placeholder">👩‍💻</span>
++                                </div>
++                                <div class="member-info">
++                                    <h4>佐藤 花子</h4>
++                                    <p>データアナリスト</p>
++                                </div>
++                            </div>
++                            <div class="team-member">
++                                <div class="member-avatar">
++                                    <span class="avatar-placeholder">👨‍🎨</span>
++                                </div>
++                                <div class="member-info">
++                                    <h4>山田 次郎</h4>
++                                    <p>クリエイティブディレクター</p>
++                                </div>
++                            </div>
++                            <div class="team-member">
++                                <div class="member-avatar">
++                                    <span class="avatar-placeholder">👩‍🚀</span>
++                                </div>
++                                <div class="member-info">
++                                    <h4>鈴木 美咲</h4>
++                                    <p>SNSマネージャー</p>
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++                </div>
++            </div>
++        </section>
++
++        <!-- Contact Section -->
++        <section class="contact" id="contact">
++            <div class="container">
++                <div class="contact-content">
++                    <div class="contact-info">
++                        <span class="section-tag">Contact</span>
++                        <h2 class="section-title">無料戦略診断を始めましょう</h2>
++                        <p class="contact-description">
++                            現在のSNS運用状況を分析し、改善点と成長戦略をご提案します。
++                            30分の無料コンサルティングで、あなたのビジネスの可能性を発見してください。
++                        </p>
++                        
++                        <div class="contact-benefits">
++                            <div class="benefit-item">
++                                <span class="benefit-icon">✓</span>
++                                <span>現状分析レポート</span>
++                            </div>
++                            <div class="benefit-item">
++                                <span class="benefit-icon">✓</span>
++                                <span>改善提案書</span>
++                            </div>
++                            <div class="benefit-item">
++                                <span class="benefit-icon">✓</span>
++                                <span>成長戦略ロードマップ</span>
++                            </div>
++                        </div>
++
++                        <div class="contact-details">
++                            <div class="contact-item">
++                                <div class="contact-icon">📧</div>
++                                <div class="contact-text">
++                                    <span>Email</span>
++                                    <a href="mailto:hello@socialboost-pro.com">hello@socialboost-pro.com</a>
++                                </div>
++                            </div>
++                            <div class="contact-item">
++                                <div class="contact-icon">📞</div>
++                                <div class="contact-text">
++                                    <span>Phone</span>
++                                    <a href="tel:03-1234-5678">03-1234-5678</a>
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++
++                    <div class="contact-form-wrapper">
++                        <form class="contact-form" id="contactForm">
++                            <div class="form-group">
++                                <label for="name">お名前 *</label>
++                                <input type="text" id="name" name="name" required>
++                            </div>
++                            
++                            <div class="form-group">
++                                <label for="company">会社名</label>
++                                <input type="text" id="company" name="company">
++                            </div>
++                            
++                            <div class="form-group">
++                                <label for="email">メールアドレス *</label>
++                                <input type="email" id="email" name="email" required>
++                            </div>
++                            
++                            <div class="form-group">
++                                <label for="phone">電話番号</label>
++                                <input type="tel" id="phone" name="phone">
++                            </div>
++                            
++                            <div class="form-group">
++                                <label for="service">ご興味のあるサービス</label>
++                                <select id="service" name="service">
++                                    <option value="">選択してください</option>
++                                    <option value="strategy">戦略コンサルティング</option>
++                                    <option value="content">コンテンツ制作・運用</option>
++                                    <option value="ads">SNS広告運用</option>
++                                    <option value="analytics">データ分析・改善</option>
++                                    <option value="all">すべてのサービス</option>
++                                </select>
++                            </div>
++                            
++                            <div class="form-group">
++                                <label for="message">メッセージ</label>
++                                <textarea id="message" name="message" rows="5" placeholder="現在の課題やご要望をお聞かせください"></textarea>
++                            </div>
++                            
++                            <button type="submit" class="btn btn-primary btn-full">
++                                無料診断を申し込む
++                                <span class="btn-arrow">→</span>
++                            </button>
++                        </form>
++                    </div>
++                </div>
++            </div>
++        </section>
++    </main>
++
++    <!-- Footer -->
++    <footer class="footer">
++        <div class="container">
++            <div class="footer-content">
++                <div class="footer-brand">
++                    <div class="brand-link">
++                        <span class="brand-text">SocialBoost</span>
++                        <span class="brand-pro">Pro</span>
++                    </div>
++                    <p class="footer-description">
++                        SNSマーケティングでビジネスの成長を加速させる
++                        デジタルエージェンシーです。
++                    </p>
++                </div>
++                
++                <div class="footer-links">
++                    <div class="footer-column">
++                        <h4>サービス</h4>
++                        <ul>
++                            <li><a href="#services">戦略コンサルティング</a></li>
++                            <li><a href="#services">コンテンツ制作</a></li>
++                            <li><a href="#services">SNS広告運用</a></li>
++                            <li><a href="#services">データ分析</a></li>
++                        </ul>
++                    </div>
++                    
++                    <div class="footer-column">
++                        <h4>会社情報</h4>
++                        <ul>
++                            <li><a href="#about">会社概要</a></li>
++                            <li><a href="#results">実績</a></li>
++                            <li><a href="#">プライバシーポリシー</a></li>
++                            <li><a href="#">利用規約</a></li>
++                        </ul>
++                    </div>
++                    
++                    <div class="footer-column">
++                        <h4>お問い合わせ</h4>
++                        <ul>
++                            <li><a href="#contact">無料相談</a></li>
++                            <li><a href="mailto:hello@socialboost-pro.com">hello@socialboost-pro.com</a></li>
++                            <li><a href="tel:03-1234-5678">03-1234-5678</a></li>
++                        </ul>
++                    </div>
++                </div>
++            </div>
++            
++            <div class="footer-bottom">
++                <p>&copy; 2024 SocialBoost Pro. All rights reserved.</p>
++                <div class="social-links">
++                    <a href="#" class="social-link">Twitter</a>
++                    <a href="#" class="social-link">LinkedIn</a>
++                    <a href="#" class="social-link">Instagram</a>
++                </div>
++            </div>
++        </div>
++    </footer>
++
++    <!-- Scripts -->
++    <script src="script.js"></script>
++</body>
++</html>
+EOF
+)
 
-    /* ===== Header ===== */
-    header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(10px);background:linear-gradient(180deg, rgba(10,12,18,.85), rgba(10,12,18,.65));border-bottom:1px solid rgba(138,141,253,.18)}
-    .hdr{display:flex;align-items:center;justify-content:space-between;gap:12px;height:64px}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
-    .brand .dot{width:10px;height:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));border-radius:999px;box-shadow:0 0 18px rgba(139,141,252,.6)}
-    nav{display:flex;gap:18px;align-items:center}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:14px;border:1px solid rgba(139,141,252,.25);background:linear-gradient(180deg,rgba(27,30,45,.9),rgba(22,24,36,.9));transition:.2s ease}
-    .btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.25)}
-    .btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b0d14;font-weight:700}
-    .btn.ghost{background:transparent}
-
-    /* ===== Hero ===== */
-    .hero{position:relative;isolation:isolate}
-    .hero::before{content:"";position:absolute;inset:-20vh -10vw;z-index:-1;background:radial-gradient(900px 400px at 20% 20%, rgba(139,141,252,.25), transparent 60%), radial-gradient(700px 350px at 80% 10%, rgba(198,183,255,.18), transparent 60%), radial-gradient(1200px 700px at 50% 120%, rgba(75,90,255,.18), transparent 60%)}
-    .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:68px 20px 44px}
-    .kicker{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border:1px dashed rgba(139,141,252,.35);border-radius:999px;color:var(--ink-dim)}
-    .h1{font-size:clamp(28px, 4.6vw, 54px);line-height:1.15;margin:.4em 0 .3em;font-weight:800;letter-spacing:.2px}
-    .lead{color:var(--ink-dim);font-size:clamp(14px, 1.6vw, 18px)}
-    .ctaRow{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0 0}
-    .badges{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
-    .badge{background:linear-gradient(180deg,rgba(33,37,58,.9),rgba(25,29,48,.9));border:1px solid rgba(139,141,252,.25);padding:14px;border-radius:14px}
-    .badge b{display:block;font-size:20px}
-    .hero-illus{aspect-ratio:4/3;border-radius:18px;background:linear-gradient(135deg, rgba(139,141,252,.25), rgba(198,183,255,.15)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="%238b8dfc"/><stop offset="1" stop-color="%23c6b7ff"/></linearGradient></defs><rect fill="%23141822" width="100%" height="100%"/><circle cx="150" cy="140" r="90" fill="url(%23g)" opacity="0.6"/><circle cx="420" cy="340" r="160" fill="url(%23g)" opacity="0.3"/><circle cx="670" cy="180" r="120" fill="url(%23g)" opacity="0.4"/></svg>') center/cover;border:1px solid rgba(139,141,252,.25);box-shadow:0 20px 60px rgba(0,0,0,.25)}
-
-    /* ===== Sections ===== */
-    section{padding:56px 0;border-top:1px solid rgba(139,141,252,.12)}
-    .sec-h{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}
-    .sec-h h2{font-size:clamp(20px,3.2vw,30px);margin:0}
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .card{background:var(--card);border:1px solid rgba(139,141,252,.2);border-radius:16px;padding:18px}
-    .card h3{margin:.2em 0 .3em;font-size:18px}
-    .muted{color:var(--ink-dim)}
-
-    /* ===== Slider (vanilla, scroll-snap) ===== */
-    .slider{position:relative}
-    .track{display:grid;grid-auto-flow:column;grid-auto-columns:80%; gap:16px; overflow:auto; scroll-snap-type:x mandatory; padding:6px 6px 10px}
-    .slide{scroll-snap-align:center; background:var(--paper); border:1px solid rgba(139,141,252,.2); border-radius:16px; padding:18px; min-height:160px}
-    .dots{display:flex; gap:8px; justify-content:center; margin-top:10px}
-    .dot{width:8px;height:8px;border-radius:999px;background:#485;opacity:.35}
-    .dot.on{opacity:1;background:var(--accent)}
-    .navBtn{position:absolute;top:50%;translate:0 -50%;background:rgba(18,20,30,.6);border:1px solid rgba(139,141,252,.25);padding:10px 12px;border-radius:12px;cursor:pointer}
-    .navBtn:hover{background:rgba(18,20,30,.8)}
-    .navPrev{left:-8px} .navNext{right:-8px}
-
-    /* ===== Info footer ===== */
-    .info{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .info a{display:inline-flex;gap:8px;align-items:center}
-    footer{padding:28px 0 50px;color:var(--ink-dim)}
-    .sns{display:flex;gap:14px;margin-top:10px}
-
-    /* ===== Responsive ===== */
-    @media (max-width:900px){
-      .hero .wrap{grid-template-columns:1fr}
-      .grid3{grid-template-columns:1fr}
-      .track{grid-auto-columns:90%}
-      .navPrev{left:6px} .navNext{right:6px}
-      .info{grid-template-columns:1fr}
-    }
-  </style>
-</head>
-<body>
-  <!-- ===== Header ===== -->
-  <header>
-    <div class="wrap hdr">
-      <div class="brand"><span class="dot"></span><a href="#top">Daiki Fujiike / SelfTalk Lab</a></div>
-      <nav>
-        <a class="btn ghost" href="#services">サービス</a>
-        <a class="btn ghost" href="#about">プロフィール</a>
-        <a class="btn primary" href="mailto:YOUR_EMAIL@example.com?subject=%E7%9B%B8%E8%AB%87%E3%83%BB%E4%BC%9A%E8%AB%87%E3%81%AE%E4%BC%9A%E7%B4%84">お問い合わせ</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- ===== Hero ===== -->
-  <section class="hero" id="top">
-    <div class="wrap">
-      <div>
-        <span class="kicker">学びを、行動へ。</span>
-        <h1 class="h1">印象派の色彩で設計する <br> 学習体験とデジタル発信。</h1>
-        <p class="lead">AandIのLP仕様（<b>2つのCTA</b>、<b>実績バッジ</b>、<b>スライダー</b>、<b>情報フッター</b>）を踏襲しつつ、SelfTalk Labの文脈に最適化したミニマルな構成。</p>
-        <div class="ctaRow">
-          <a class="btn primary" href="#personal">個人向けサービス</a>
-          <a class="btn" href="#biz">法人向けサービス</a>
-        </div>
-        <div class="badges" aria-label="ハイライト">
-          <div class="badge" role="group" aria-label="短尺コンテンツ"><b>Short-form</b><span class="muted">書籍起点の動画/ノート</span></div>
-          <div class="badge" role="group" aria-label="ワークシート設計"><b>Worksheets</b><span class="muted">24時間以内の行動</span></div>
-          <div class="badge" role="group" aria-label="ポートフォリオ"><b>Portfolio</b><span class="muted">見せる・伝える設計</span></div>
-        </div>
-      </div>
-      <div class="hero-illus" aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <!-- ===== Services ===== -->
-  <section id="services">
-    <div class="wrap">
-      <div class="sec-h">
-        <h2>サービス</h2>
-        <a class="btn ghost" href="#contact">相談する</a>
-      </div>
-      <div class="grid3">
-        <article class="card" id="personal">
-          <h3>SelfTalk Lab（個人）</h3>
-          <p class="muted">自己対話テンプレート×習慣化。動画ノートと週次の見直しで行動密度を高めます。</p>
-          <p><a class="btn" href="#contact">無料相談</a></p>
-        </article>
-        <article class="card" id="biz">
-          <h3>学習デザイン（法人）</h3>
-          <p class="muted">書籍起点のマイクロラーニング、内製ポートフォリオ雛形、学生向けワークショップ設計。</p>
-          <p><a class="btn" href="#contact">資料請求</a></p>
-        </article>
-        <article class="card">
-          <h3>Portfolio Systems</h3>
-          <p class="muted">大学生のための「見せる・伝える」雛形。GitHub Pages対応の静的テンプレートを提供。</p>
-          <p><a class="btn" href="#contact">雛形を依頼</a></p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Slider ===== -->
-  <section aria-label="事例・ノートのスライダー">
-    <div class="wrap slider">
-      <div class="sec-h"><h2>Notes & Cases</h2></div>
-      <button class="navBtn navPrev" aria-label="前へ" onclick="snap(-1)">◀</button>
-      <button class="navBtn navNext" aria-label="次へ" onclick="snap(1)">▶</button>
-      <div class="track" id="track" onscroll="syncDots()">
-        <div class="slide"><b>自己対話：7つの習慣 × Chatter</b><p class="muted">毎日の問いの雛形で、思考のループを良性化。</p></div>
-        <div class="slide"><b>Book to Action</b><p class="muted">『チーズはどこへ消えた？』→ 24時間以内の小さな実験。</p></div>
-        <div class="slide"><b>Portfolio 雛形</b><p class="muted">GitHub Pagesにそのまま載せられる静的構成。</p></div>
-        <div class="slide"><b>TikTok Short-form</b><p class="muted">書籍の要点を60秒で。実践の導線を必ず添える。</p></div>
-      </div>
-      <div class="dots" id="dots" aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <!-- ===== About ===== -->
-  <section id="about">
-    <div class="wrap">
-      <div class="sec-h"><h2>プロフィール</h2></div>
-      <div class="grid3">
-        <article class="card">
-          <h3>藤池 大輝</h3>
-          <p class="muted">Momoyama Gakuin University / Business Design 3年。SelfTalk Lab 創設。</p>
-        </article>
-        <article class="card">
-          <h3>スキル</h3>
-          <p class="muted">構成・コピー / HTML・CSS・JS / GitHub Pages / Notion / Canva</p>
-        </article>
-        <article class="card">
-          <h3>価値観</h3>
-          <p class="muted">誠実・勇敢・思いやり</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Info (利用規約/プライバシー/特商法) ===== -->
-  <section>
-    <div class="wrap info">
-      <div>
-        <h2 class="muted" style="margin:0 0 8px">Information</h2>
-        <p><a href="#terms">利用規約（準備中）</a></p>
-        <p><a href="#privacy">プライバシーポリシー（準備中）</a></p>
-        <p><a href="#law">特定商取引法に基づく表記（準備中）</a></p>
-      </div>
-      <div>
-        <h2 class="muted" style="margin:0 0 8px">Contact</h2>
-        <p>返信目安：48時間以内</p>
-        <div class="sns">
-          <a href="https://x.com" target="_blank" rel="noopener">X</a>
-          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Footer ===== -->
-  <footer>
-    <div class="wrap">
-      <p>© <span id="y"></span> Daiki Fujiike · Built for GitHub Pages · Design: Impressionist hues</p>
-    </div>
-  </footer>
-
-  <!-- Floating CTA -->
-  <a href="mailto:YOUR_EMAIL@example.com?subject=%E7%9B%B8%E8%AB%87%E3%81%AE%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B" class="btn primary" style="position:fixed;right:16px;bottom:16px;z-index:60">問い合わせ</a>
-
-  <script>
-    // Year
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Slider dots
-    const track = document.getElementById('track');
-    const dotsBox = document.getElementById('dots');
-    function buildDots(){
-      const n = track.children.length;
-      dotsBox.innerHTML = '';
-      for(let i=0;i<n;i++){
-        const d = document.createElement('span');
-        d.className = 'dot' + (i===0?' on':'');
-        d.dataset.i = i;
-        d.addEventListener('click', ()=>scrollToIndex(i));
-        dotsBox.appendChild(d);
-      }
-    }
-    function indexFromScroll(){
-      const w = track.getBoundingClientRect().width;
-      const sc = track.scrollLeft;
-      return Math.round(sc / (w*0.8 + 16));
-    }
-    function syncDots(){
-      const idx = indexFromScroll();
-      [...dotsBox.children].forEach((d,i)=>d.classList.toggle('on', i===idx));
-    }
-    function scrollToIndex(i){
-      const w = track.getBoundingClientRect().width;
-      track.scrollTo({ left: i*(w*0.8 + 16), behavior:'smooth' });
-    }
-    function snap(step){
-      const i = Math.max(0, Math.min(track.children.length-1, indexFromScroll()+step));
-      scrollToIndex(i);
-    }
-    buildDots();
-  </script>
-</body>
-</html>
+実行して
